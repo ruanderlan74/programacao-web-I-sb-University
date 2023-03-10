@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{base :: layout (~{:: main})}">
+<head>
+    <meta charset="UTF-8" />
+    <title>Alunos</title>
+</head>
+<body>
+<main>
+    <h1>Alunos</h1>
+
+    <div>
+        <nobr>
+            <a th:href="@{/aluno/add}">Add Alunos</a> |
+            <a th:href="@{/}">Voltar</a>
+        </nobr>
+    </div>
+    <br/><br/>
+    <div>
+        <table class="table">
+            <tr>
+                <th>Id</th>
+                <th>Nome</th>
+                <th>Documento</th>
+                <th>Matricula</th>
+                <th>Curso</th>
+            </tr>
+            <tr th:each ="aluno : ${alunos}">
+                <td th:utext="${aluno.id}">...</td>
+                <td th:utext="${aluno.nome}">...</td>
+                <td th:utext="${aluno.documento}">...</td>
+                <td th:utext="${aluno.matricula}">...</td>
+                <td th:utext="${aluno.curso}">...</td>
+                <td>
+                    <a class="btn btn-primary btn-sm" th:href="@{/aluno/{alunoId}/edit(alunoId=${aluno.id})}">Edit</a>
+                    <a class="btn btn-danger btn-sm" th:href="@{/aluno/{alunoId}/delete(alunoId=${aluno.id})}">Delete</a>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+    <br/>
+</main>
+</body>
+</html>

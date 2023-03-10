@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{base :: layout (~{:: main})}">
+<head>
+  <meta charset="UTF-8" />
+</head>
+<body>
+<main>
+  <form th:action="${add} ? @{/aluno/add} : @{/aluno/{alunoId}/edit(alunoId=${aluno.id})}"
+        th:object="${aluno}" th:method="${add} ? POST : PUT">
+    <div class="container">
+      <h1 th:text="${add} ? 'Cadastrar Aluno' : 'Editar Aluno'"></h1>
+      <div th:if="${aluno.id}" class="mb-3 row">
+        <label for="inputId" class="col-sm-2 col-form-label">Id</label>
+        <div class="col-sm-3">
+          <input type="text" th:readonly="${add} ? 'false' : 'true'" th:field="${aluno.id}" class="form-control" id="inputId">
+        </div>
+      </div>
+      <div class="mb-3 row">
+        <label for="inputNome" class="col-sm-2 col-form-label">Nome</label>
+        <div class="col-sm-3">
+          <input type="text" th:field="*{nome}" class="form-control" id="inputNome">
+        </div>
+      </div>
+      <div class="mb-3 row">
+        <label for="inputMatricula" class="col-sm-2 col-form-label">Matricula</label>
+        <div class="col-sm-3">
+          <input type="text" th:readonly="${add} ? 'false' : 'true'" th:field="*{matricula}" class="form-control" id="inputMatricula">
+          <ul>
+            <li th:each="erro : ${#fields.errors('matricula')}" th:text="${erro}" />
+          </ul>
+        </div>
+      </div>
+      <div class="mb-3 row">
+        <label for="inputDocumento" class="col-sm-2 col-form-label">Documento</label>
+        <div class="col-sm-3">
+          <input type="text" th:field="*{documento}" class="form-control" id="inputDocumento">
+        </div>
+      </div>
+      <div class="mb-3 row">
+        <label for="inputCurso" class="col-sm-2 col-form-label">Curso</label>
+        <div class="col-sm-3">
+          <input type="text" th:field="*{curso}" class="form-control" id="inputCurso">
+        </div>
+      </div>
+      <input type="submit" value="Gravar" class="btn btn-primary mb-3"/>
+      <br/><br/>
+      <a th:href="@{/alunos}">Voltar</a>
+    </div>
+  </form>
+  <br/>
+</main>
+</body>
+</html>
